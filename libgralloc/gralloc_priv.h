@@ -34,6 +34,7 @@ enum {
     /* gralloc usage bit indicating a pmem_adsp allocation should be used */
     GRALLOC_USAGE_PRIVATE_PMEM_ADSP = GRALLOC_USAGE_PRIVATE_0,
     GRALLOC_USAGE_PRIVATE_PMEM = GRALLOC_USAGE_PRIVATE_1,
+    GRALLOC_MODULE_PERFORM_CREATE_HANDLE_FROM_BUFFER = 0x080000001,
 };
 
 #define NUM_BUFFERS 2
