@@ -32,6 +32,11 @@ PRODUCT_COPY_FILES += \
     device/lge/thunderg/prebuilt/etc/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/lge/thunderg/prebuilt/etc/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
 
+# BT startup
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh
+
+ # Board-specific init
 
 # Board-specific init
 PRODUCT_COPY_FILES += \
@@ -156,6 +161,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # RIL
 PRODUCT_COPY_FILES += \
+    vendor/lge/thunderg/proprietary/lib/libidl.so:system/lib/libidl.so \
     vendor/lge/thunderg/proprietary/lib/libril-qc-1.so:system/lib/libril-qc-1.so \
     vendor/lge/thunderg/proprietary/lib/liboncrpc.so:system/lib/liboncrpc.so \
     vendor/lge/thunderg/proprietary/lib/libdsm.so:system/lib/libdsm.so \
@@ -174,6 +180,7 @@ PRODUCT_COPY_FILES += \
     vendor/lge/thunderg/proprietary/lib/liboem_rapi.so:system/lib/liboem_rapi.so \
     vendor/lge/thunderg/proprietary/lib/libsnd.so:system/lib/libsnd.so \
     vendor/lge/thunderg/proprietary/lib/libqmi.so:system/lib/libqmi.so \
+    vendor/lge/thunderg/proprietary/lib/libdsutils.so:system/lib/libdsutils.so \
     vendor/lge/thunderg/proprietary/lib/libdll.so:system/lib/libdll.so \
     vendor/lge/thunderg/proprietary/lib/liblgeat.so:system/lib/liblgeat.so \
     vendor/lge/thunderg/proprietary/lib/liblgdrm.so:system/lib/liblgdrm.so \
