@@ -1,5 +1,6 @@
 $(call inherit-product, build/target/product/full.mk)
 $(call inherit-product, build/target/product/languages_full.mk)
+$(call inherit-product, vendor/cm/config/common.mk)
 $(call inherit-product-if-exists, vendor/lge/thunderg/thunderg-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/thunderg/overlay
@@ -25,12 +26,19 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/lge/thunderg/prebuilt/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
-    device/lge/thunderg/prebuilt/etc/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
+    device/lge/thunderg/prebuilt/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
+    vendor/lge/thunderg/proprietary/etc/init.local.rc:system/etc/init.local.rc \
+    vendor/lge/thunderg/proprietary/etc/init.thunderg.usb.rc:system/etc/init.thunderg.usb.rc \
     device/lge/thunderg/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
     device/lge/thunderg/prebuilt/etc/nvram.txt:system/etc/wl/nvram.txt \
     device/lge/thunderg/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/lge/thunderg/prebuilt/etc/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/lge/thunderg/prebuilt/etc/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+
+#WIFI
+PRODUCT_COPY_FILES += \
+    vendor/lge/thunderg/proprietary/bin/dhcpcd:system/bin/dhcpcd \
+    
 
 # BT startup
 PRODUCT_COPY_FILES += \
@@ -43,6 +51,7 @@ PRODUCT_COPY_FILES += \
     vendor/lge/thunderg/proprietary/init.thunderg.rc:root/init.thunderg.rc \
     vendor/lge/thunderg/proprietary/initlogo.rle:root/initlogo.rle \
     vendor/lge/thunderg/proprietary/ueventd.thunderg.rc:root/ueventd.thunderg.rc \
+    
 
 # OFFLINE CHARGING
 PRODUCT_COPY_FILES += \
@@ -94,11 +103,14 @@ PRODUCT_COPY_FILES += \
     vendor/lge/thunderg/proprietary/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
     vendor/lge/thunderg/proprietary/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
     vendor/lge/thunderg/proprietary/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
+    vendor/lge/thunderg/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \
     vendor/lge/thunderg/proprietary/lib/libgsl.so:system/lib/libgsl.so \
     vendor/lge/thunderg/proprietary/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
     vendor/lge/thunderg/proprietary/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \
-#   device/lge/thunderg/prebuilt/lib/hw/gralloc.p500.so:system/lib/hw/gralloc.p500.so \
-#   device/lge/thunderg/prebuilt/lib/libsurfaceflinger.so:system/lib/libsurfaceflinger.so \
+    vendor/lge/thunderg/proprietary/lib/hw/gralloc.thunderg.so:system/lib/hw/gralloc.thunderg.so \
+    vendor/lge/thunderg/proprietary/lib/hw/copybit.thunderg.so:system/lib/hw/copybit.thunderg.so \
+    vendor/lge/thunderg/proprietary/lib/libmemalloc.so:system/lib/libmemalloc.so \
+    device/lge/thunderg/prebuilt/lib/libsurfaceflinger.so:system/lib/libsurfaceflinger.so \
 
 # Camera
 PRODUCT_COPY_FILES += \
@@ -127,6 +139,12 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
+    vendor/lge/thunderg/proprietary/lib/hw/audio.a2dp.default.so:system/lib/hw/audio.a2dp.default.so \
+    vendor/lge/thunderg/proprietary/lib/hw/audio.primary.thunderg.so:system/lib/hw/audio.primary.thunderg.so \
+    vendor/lge/thunderg/proprietary/lib/hw/audio.primary.default.so:system/lib/hw/audio.primary.default.so \
+    vendor/lge/thunderg/proprietary/lib/hw/audio_policy.thunderg.so:system/lib/hw/audio_policy.thunderg.so \
+    vendor/lge/thunderg/proprietary/lib/hw/audio.primary.goldfish.so:system/lib/hw/audio.primary.goldfish.so \
+    vendor/lge/thunderg/proprietary/lib/hw/audio_policy.default.so:system/lib/hw/audio_policy.default.so \
     vendor/lge/thunderg/proprietary/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
     vendor/lge/thunderg/proprietary/lib/liba2dp.so:system/lib/liba2dp.so \
     vendor/lge/thunderg/proprietary/lib/liba2dp.so:obj/lib/liba2dp.so \
@@ -264,10 +282,16 @@ PRODUCT_COPY_FILES += \
  vendor/lge/thunderg/proprietary/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
 
 #hwcomposer shit
-#PRODUCT_COPY_FILES += \
-#    vendor/lge/thunderg/proprietary/lib/hw/hwcomposer.default.so:system/lib/hw/hwcomposer.default.so \
-#    vendor/lge/thunderg/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so 
+PRODUCT_COPY_FILES += \
+   vendor/lge/thunderg/proprietary/lib/hw/hwcomposer.default.so:system/lib/hw/hwcomposer.default.so \
 
+
+#PREBUILDED APPS
+PRODUCT_COPY_FILES += \
+	vendor/lge/thunderg/packages/app/LatinIME.apk:system/app/LatinIME.apk \
+        vendor/lge/thunderg/packages/app/usbstorage.apk:system/app/usbstorage.apk \
+
+	
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := thunderg
